@@ -37,7 +37,7 @@ open class SpringConfig {
 
     @Autowired
     open fun setExceptionHandlerFilter(exceptionHandlerFilter: ExceptionHandlerFilter) {
-        this.exceptionHandlerFilter = exceptionHandlerFilter!!
+        this.exceptionHandlerFilter = exceptionHandlerFilter
     }
 
     @Autowired
