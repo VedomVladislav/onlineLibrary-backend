@@ -70,7 +70,7 @@ public class EmailService {
                     "Здравствуйте.<br/><br/>" +
                             "Someone requested password reset for web-application \"To-do planner\".<br/><br/>" +
                             "If it wasn't you please delete this letter.<br/><br/> Click the link below if you want to reset password: <br/><br/> " +
-                            "<a href='%s'>%s</a><br/><br/>", url, "Сбросить пароль");
+                            "<a href='%s'>%s</a><br/><br/>", url, "Reset password");
 
             mimeMessage.setContent(htmlMsg, "text/html");
             message.setTo(email);

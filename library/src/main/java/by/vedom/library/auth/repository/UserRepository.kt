@@ -24,6 +24,6 @@ interface UserRepository: CrudRepository<User, Long> {
 
     @Modifying
     @Transactional
-    @Query("UPDATE User u SET u.password = :password WHERE u.username = :username")
-    fun updateUserPassword(@Param("password") password: String, @Param("username") username: String): Int
+    @Query("UPDATE User u SET u.password = :password WHERE u.email = :email")
+    fun updateUserPassword(@Param("password") password: String, @Param("email") email: String): Int
 }
