@@ -37,16 +37,16 @@ open class SpringConfig {
 
     @Autowired
     open fun setExceptionHandlerFilter(exceptionHandlerFilter: ExceptionHandlerFilter) {
-        this.exceptionHandlerFilter = exceptionHandlerFilter!!
+        this.exceptionHandlerFilter = exceptionHandlerFilter
     }
 
     @Autowired
-    open fun setAuthTokenFilter(authTokenFilter: AuthTokenFilter) { // внедряем фильтр
+    open fun setAuthTokenFilter(authTokenFilter: AuthTokenFilter) {
         this.authTokenFilter = authTokenFilter
     }
 
     @Autowired
-    open fun setUserDetailsService(userDetailsService: UserDetailsServiceImpl) { // внедряем наш компонент Spring @Service
+    open fun setUserDetailsService(userDetailsService: UserDetailsServiceImpl) {
         this.userDetailsService = userDetailsService
     }
 

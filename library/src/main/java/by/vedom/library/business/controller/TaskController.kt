@@ -24,7 +24,7 @@ class TaskController(
     @PutMapping("/add")
     fun addTask(@RequestBody task: Task): ResponseEntity<*> {
         return try {
-            ResponseEntity.ok(taskService.add(task))
+            ResponseEntity.ok(taskService.addTask(task))
         } catch (e: NotFoundException) {
             ResponseEntity(e.message, HttpStatus.NOT_ACCEPTABLE)
         }
@@ -33,7 +33,7 @@ class TaskController(
     @PatchMapping("/update")
     fun updateTask(@RequestBody task: Task): ResponseEntity<*> {
         return try {
-            taskService.update(task)
+            taskService.updateTask(task)
             ResponseEntity("", HttpStatus.OK)
         } catch (e: NotFoundException) {
             ResponseEntity("", HttpStatus.NOT_ACCEPTABLE)
@@ -43,7 +43,7 @@ class TaskController(
     @DeleteMapping("/delete")
     fun deleteTask(@RequestBody id: Long): ResponseEntity<*> {
         return try {
-            taskService.delete(id);
+            taskService.deleteTask(id);
             ResponseEntity("Task with id = $id was successfully deleted", HttpStatus.OK)
         } catch (e: NotFoundException) {
             ResponseEntity(e.message, HttpStatus.NOT_FOUND)
@@ -53,7 +53,7 @@ class TaskController(
     @PostMapping("/id")
     fun findTaskById(@RequestBody id: Long): ResponseEntity<*> {
         return try {
-            ResponseEntity.ok(taskService.findById(id))
+            ResponseEntity.ok(taskService.findTaskById(id))
         } catch (e: NoSuchElementException) {
             ResponseEntity("id = $id not found", HttpStatus.NOT_ACCEPTABLE)
         }
@@ -62,7 +62,7 @@ class TaskController(
     @PostMapping("/search")
     fun search(@RequestBody taskSearchValues: TaskSearchValues): ResponseEntity<*> {
         return try {
-            return ResponseEntity.ok(taskService.find(taskSearchValues))
+            return ResponseEntity.ok(taskService.findTask(taskSearchValues))
         } catch (e: Exception) {
             ResponseEntity("Any params is absent, check your call", HttpStatus.INTERNAL_SERVER_ERROR)
         }

@@ -10,8 +10,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -32,11 +32,7 @@ public class TaskService {
         return taskRepository.findByUserEmailOrderByTitleAsc(email);
     }
 
-    public Task add(Task task) throws NotFoundException {
-
-//        if (task.getId() != null || task.getId() != 0) {
-//            throw new NotFoundException("missed param id");
-//        }
+    public Task addTask(Task task) throws NotFoundException {
 
         if (task.getTitle() == null || task.getTitle().trim().length() == 0) {
             throw new NotFoundException("missed param title");
@@ -44,7 +40,7 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    public Task update(Task task) throws NotFoundException {
+    public Task updateTask(Task task) throws NotFoundException {
 
         if (task.getId() == null || task.getId() == 0L) {
             throw new NotFoundException("missed param id");
@@ -57,7 +53,7 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    public void delete(Long id) throws NotFoundException {
+    public void deleteTask(Long id) throws NotFoundException {
         if (id == null || id == 0) {
             throw new NotFoundException("missed param id");
         }
@@ -69,21 +65,21 @@ public class TaskService {
         }
     }
 
-    public Task findById(Long id) {
+    public Task findTaskById(Long id) {
         return taskRepository.findById(id).orElse(null);
     }
 
-    public Page<Task> find(TaskSearchValues taskSearchValues) {
-        String title = taskSearchValues.getTitle() != null ? taskSearchValues.getTitle(): null;
-        Integer completed = taskSearchValues.getCompleted() != null ? taskSearchValues.getCompleted(): null;
-        Long priorityId = taskSearchValues.getPriorityId() != null ? taskSearchValues.getPriorityId(): null;
-        Long categoryId = taskSearchValues.getCategoryId() != null ? taskSearchValues.getCategoryId(): null;
+    public Page<Task> findTask(TaskSearchValues taskSearchValues) {
+        String title = taskSearchValues.getTitle() != null ? taskSearchValues.getTitle() : null;
+        Integer completed = taskSearchValues.getCompleted() != null ? taskSearchValues.getCompleted() : null;
+        Long priorityId = taskSearchValues.getPriorityId() != null ? taskSearchValues.getPriorityId() : null;
+        Long categoryId = taskSearchValues.getCategoryId() != null ? taskSearchValues.getCategoryId() : null;
 
-        String sortColumn = taskSearchValues.getSortColumn() != null ? taskSearchValues.getSortColumn(): ID_COLUMN;
-        String sortDirection = taskSearchValues.getSortDirection() != null ? taskSearchValues.getSortDirection(): null;
+        String sortColumn = taskSearchValues.getSortColumn() != null ? taskSearchValues.getSortColumn() : ID_COLUMN;
+        String sortDirection = taskSearchValues.getSortDirection() != null ? taskSearchValues.getSortDirection() : null;
 
-        int pageNumber = taskSearchValues.getPageNumber() != null ? taskSearchValues.getPageNumber(): 0;
-        int pageSize = taskSearchValues.getPageSize() != null ? taskSearchValues.getPageSize(): 10;
+        int pageNumber = taskSearchValues.getPageNumber() != null ? taskSearchValues.getPageNumber() : 0;
+        int pageSize = taskSearchValues.getPageSize() != null ? taskSearchValues.getPageSize() : 10;
 
         String email = taskSearchValues.getEmail() != null ? taskSearchValues.getEmail(): null;
 

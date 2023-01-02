@@ -4,6 +4,7 @@ import by.vedom.library.auth.dto.ErrorDTO;
 import by.vedom.library.auth.entity.Activity;
 import by.vedom.library.auth.entity.Role;
 import by.vedom.library.auth.entity.User;
+import by.vedom.library.auth.exception.RoleNotFoundException;
 import by.vedom.library.auth.exception.UserAlreadyActivatedException;
 import by.vedom.library.auth.exception.UserOrEmailAlreadyExistsException;
 import by.vedom.library.auth.service.EmailService;
@@ -26,7 +27,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import by.vedom.library.auth.exception.RoleNotFoundException;
+
 import javax.validation.Valid;
 
 @RestController
@@ -154,12 +155,12 @@ public class AuthController {
 
     }
 
-//    @ExceptionHandler(Exception.class)
-//    public ResponseEntity<ErrorDTO> handleExceptions(Exception ex) {
-//        return new ResponseEntity<>(
-//                new ErrorDTO(ex.getClass().getSimpleName(), ex.getMessage()),
-//                HttpStatus.BAD_REQUEST
-//        );
-//    }
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorDTO> handleExceptions(Exception ex) {
+        return new ResponseEntity<>(
+                new ErrorDTO(ex.getClass().getSimpleName(), ex.getMessage()),
+                HttpStatus.BAD_REQUEST
+        );
+    }
 
 }

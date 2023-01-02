@@ -59,15 +59,6 @@ public class JwtUtils {
         claims.put(CLAIM_USER_KEY, user);
         claims.put(Claims.SUBJECT, user.getId());
 
-//        Key key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
-//        return Jwts.builder()
-//                .setClaims(claims)
-//                .setIssuedAt(currentDate)
-//                .setExpiration(calendar.getTime())
-//
-//                .signWith(SignatureAlgorithm.HS512, jwtSecret)
-//                .compact();
-
         Key key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
 
         return Jwts.builder()
@@ -80,11 +71,7 @@ public class JwtUtils {
 
     public boolean validate(String jwt) {
         try {
-
-            // все способы работы с библиотекой io.jsonwebtoken можно смотреть на странице https://github.com/jwtk/jjwt
-
-
-            // проверка подписи "секретным ключом" и получение нужных значений из payload
+            // checking the subscription with the "secret key" and getting the required payload values
             Map map = (Map) Jwts.parser().setSigningKey(jwtSecret.getBytes(StandardCharsets.UTF_8))
                             .parseClaimsJws(jwt).getBody().
                             get(CLAIM_USER_KEY);
@@ -106,12 +93,6 @@ public class JwtUtils {
 
         return false;
     }
-
-//    public User getUser(String jwt) {
-//        Map map = (Map) Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(jwt).getBody().get(CLAIM_USER_KEY);
-//        ObjectMapper mapper = new ObjectMapper();
-//        return mapper.convertValue(map, User.class);
-//    }
 
     public User getUser() {
         return user;

@@ -89,8 +89,8 @@ public class UserService {
         return activity;
     }
 
-    public int updateUserPassword(String password, String username) {
-        return userRepository.updateUserPassword(password, username);
+    public int updateUserPassword(String password, String email) {
+        return userRepository.updateUserPassword(password, email);
     }
 
     public int activate(String uuid) {
